@@ -7,7 +7,7 @@
 #include "TempUI.cpp"
 #include "UmiUI.cpp"
 #include "LuzUI.cpp"
-
+#include "TempoUI.cpp"
 
 
 
@@ -45,6 +45,7 @@ RTC_DS3231 rtc;
 TemperaturaControl temperaturaControl;
 UmidadeControl umidadeControl;
 LuzControl luzControl;
+Tempo tempo;
 
 
 
@@ -380,7 +381,6 @@ void loop()
 
     case 2:
 
-
       if (Umidade != umidadeAntiga) {
         Serial.print("Umidade: ");
         Serial.println(Umidade);
@@ -391,20 +391,19 @@ void loop()
       break;
 
     case 3:
-
+       
+       temperaturaControl.UI(Temperatura, lcd, EntradaBotao02);
+      
       if (temperaturaAntiga != Temperatura) {
         Serial.print("%  Temperatura: ");
         Serial.print(Temperatura);
         Serial.println("C");
       }
 
-
-      temperaturaControl.UI(Temperatura,lcd);
-
       break;
 
     case 4:
-      TempoUI(agora);
+       tempo.UI(agora, lcd, EntradaBotao02);
       break;
   }
 
